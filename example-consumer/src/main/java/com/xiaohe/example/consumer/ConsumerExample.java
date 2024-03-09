@@ -13,6 +13,8 @@ public class ConsumerExample {
 
     public static void main(String[] args) {
         RpcConfig rpc = ConfigUtils.loadConfig(RpcConfig.class, "rpc");
+        RpcConfig rpc2 = ConfigUtils.loadConfigYml(RpcConfig.class, "rpc");
         System.out.println(rpc);
+        System.out.println(rpc2);
     }
 }

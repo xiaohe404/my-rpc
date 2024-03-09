@@ -45,7 +45,7 @@ public class ConfigUtils {
             configFileBuilder.append("-").append(environment);
         }
         configFileBuilder.append(".properties");
-        Props props = new Props(configFileBuilder.toString());
+        Props props = new Props(configFileBuilder.toString(), "UTF-8");
         return props.toBean(tClass, prefix);
     }
 
@@ -57,7 +57,8 @@ public class ConfigUtils {
          configFileBuilder.append(".yml");
         // 使用 SnakeYml 解析 yml
          Yaml yaml = new Yaml();
-         Map<String, Object> map = yaml.load(ConfigUtils.class.getClassLoader().getResourceAsStream(configFileBuilder.toString()));
+         Map<String, Object> map = yaml
+                 .load(ConfigUtils.class.getClassLoader().getResourceAsStream(configFileBuilder.toString()));
          return BeanUtil.toBean(map.get(prefix), tClass);
     }
 
