@@ -1,7 +1,10 @@
 package com.xiaohe.myrpc;
 
+import com.xiaohe.myrpc.config.RegistryConfig;
 import com.xiaohe.myrpc.config.RpcConfig;
 import com.xiaohe.myrpc.constant.RpcConstant;
+import com.xiaohe.myrpc.registry.Registry;
+import com.xiaohe.myrpc.registry.RegistryFactory;
 import com.xiaohe.myrpc.utils.ConfigUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +25,11 @@ public class RpcApplication {
     public static void init(RpcConfig newRpcConfig) {
         rpcConfig = newRpcConfig;
         log.info("rpc init, config = {}", newRpcConfig.toString());
+        // 注册中心初始化
+        RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
+        Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
+        registry.init(registryConfig);
+        log.info("registry init, config = {}", registryConfig);
     }
 
     /**

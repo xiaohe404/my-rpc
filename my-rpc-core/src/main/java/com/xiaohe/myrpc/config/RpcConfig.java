@@ -1,5 +1,6 @@
 package com.xiaohe.myrpc.config;
 
+import com.xiaohe.myrpc.registry.EtcdRegistry;
 import com.xiaohe.myrpc.serializer.SerializerKeys;
 import lombok.Data;
 
@@ -38,5 +39,10 @@ public class RpcConfig {
      * 序列化器
      */
     private String serializer = SerializerKeys.JDK;
+
+    /**
+     * 注册中心
+     */
+    private RegistryConfig registryConfig = new RegistryConfig();
 
 }

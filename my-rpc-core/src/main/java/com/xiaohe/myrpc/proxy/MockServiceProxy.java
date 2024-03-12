@@ -47,4 +47,29 @@ public class MockServiceProxy implements InvocationHandler {
         // 对象类型
         return null;
     }
+
+    /*public static void main(String[] args) {
+        Faker faker = new Faker(Locale.CHINA);
+
+        // 生成姓名
+        String name = faker.name().fullName();
+        System.out.println("姓名：" + name);
+
+        // 生成地址
+        String address = faker.address().fullAddress();
+        System.out.println("地址：" + address);
+
+        // 生成电子邮件
+        String email = faker.internet().emailAddress();
+        System.out.println("电子邮件：" + email);
+
+        // 生成电话号码
+        String phoneNumber = faker.phoneNumber().phoneNumber();
+        System.out.println("电话号码：" + phoneNumber);
+
+        // 生成日期
+        String date = faker.date().birthday().toString();
+        System.out.println("日期：" + date);
+
+    }*/
 }

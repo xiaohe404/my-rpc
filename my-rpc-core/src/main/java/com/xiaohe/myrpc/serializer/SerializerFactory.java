@@ -10,7 +10,7 @@ import java.util.Map;
 public class SerializerFactory {
 
     // 引入volatile关键字，防止指令重排
-    private volatile static Serializer serializer;
+    private static volatile Serializer serializer;
 
     private SerializerFactory() {
     }
