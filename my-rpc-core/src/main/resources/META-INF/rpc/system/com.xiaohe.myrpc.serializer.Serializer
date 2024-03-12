@@ -1,0 +1,4 @@
+json=com.xiaohe.myrpc.serializer.JsonSerializer
+kryo=com.xiaohe.myrpc.serializer.KryoSerializer
+jdk=com.xiaohe.myrpc.serializer.JdkSerializer
+hessian=com.xiaohe.myrpc.serializer.HessianSerializer
