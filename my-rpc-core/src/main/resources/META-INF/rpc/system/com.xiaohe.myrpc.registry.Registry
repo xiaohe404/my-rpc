@@ -1,1 +1,2 @@
 etcd=com.xiaohe.myrpc.registry.EtcdRegistry
+zookeeper=com.xiaohe.myrpc.registry.ZooKeeperRegistry
