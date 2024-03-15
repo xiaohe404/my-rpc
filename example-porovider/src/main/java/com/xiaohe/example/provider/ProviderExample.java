@@ -8,8 +8,7 @@ import com.xiaohe.myrpc.model.ServiceMetaInfo;
 import com.xiaohe.myrpc.registry.LocalRegistry;
 import com.xiaohe.myrpc.registry.Registry;
 import com.xiaohe.myrpc.registry.RegistryFactory;
-import com.xiaohe.myrpc.server.HttpServer;
-import com.xiaohe.myrpc.server.VertxHttpServer;
+import com.xiaohe.myrpc.server.tcp.VertxTcpServer;
 
 /**
  * 简易服务提供者示例
@@ -39,7 +38,7 @@ public class ProviderExample {
         }
 
         // 启动 web 服务
-        HttpServer httpServer = new VertxHttpServer();
-        httpServer.doStart(rpcConfig.getServerPort());
+        VertxTcpServer vertxTcpServer = new VertxTcpServer();
+        vertxTcpServer.doStart(rpcConfig.getServerPort());
     }
 }
