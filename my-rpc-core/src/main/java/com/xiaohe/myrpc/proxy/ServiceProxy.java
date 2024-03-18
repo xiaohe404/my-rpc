@@ -1,9 +1,13 @@
 package com.xiaohe.myrpc.proxy;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpResponse;
 import com.xiaohe.myrpc.RpcApplication;
 import com.xiaohe.myrpc.config.RpcConfig;
 import com.xiaohe.myrpc.constant.RpcConstant;
+import com.xiaohe.myrpc.fault.retry.RetryStrategy;
+import com.xiaohe.myrpc.fault.retry.RetryStrategyFactory;
 import com.xiaohe.myrpc.loadbalancer.LoadBalancer;
 import com.xiaohe.myrpc.loadbalancer.LoadBalancerFactory;
 import com.xiaohe.myrpc.model.RpcRequest;
@@ -11,6 +15,8 @@ import com.xiaohe.myrpc.model.RpcResponse;
 import com.xiaohe.myrpc.model.ServiceMetaInfo;
 import com.xiaohe.myrpc.registry.Registry;
 import com.xiaohe.myrpc.registry.RegistryFactory;
+import com.xiaohe.myrpc.serializer.Serializer;
+import com.xiaohe.myrpc.serializer.SerializerFactory;
 import com.xiaohe.myrpc.server.tcp.VertxTcpClient;
 
 import java.lang.reflect.InvocationHandler;
@@ -60,8 +66,12 @@ public class ServiceProxy implements InvocationHandler {
             requestMap.put("methodName", rpcRequest.getMethodName());
             ServiceMetaInfo selectedServiceMetaInfo = loadBalancer.select(requestMap, serviceMetaInfoList);
 
-            // 发送 TCP 请求
-            RpcResponse rpcResponse = VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo);
+            // RPC 请求
+            // 使用重试机制
+            RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
+            RpcResponse rpcResponse = retryStrategy.doRetry(() ->
+                    VertxTcpClient.doRequest(rpcRequest, selectedServiceMetaInfo)
+            );
             return rpcResponse.getData();
         } catch (Exception e) {
             throw new RuntimeException("调用失败");

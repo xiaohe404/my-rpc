@@ -8,6 +8,9 @@ import com.xiaohe.myrpc.model.ServiceMetaInfo;
 import com.xiaohe.myrpc.registry.LocalRegistry;
 import com.xiaohe.myrpc.registry.Registry;
 import com.xiaohe.myrpc.registry.RegistryFactory;
+import com.xiaohe.myrpc.server.HttpServer;
+import com.xiaohe.myrpc.server.HttpServerHandler;
+import com.xiaohe.myrpc.server.VertxHttpServer;
 import com.xiaohe.myrpc.server.tcp.VertxTcpServer;
 
 /**

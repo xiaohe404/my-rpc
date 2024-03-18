@@ -1,5 +1,7 @@
 package com.xiaohe.myrpc.config;
 
+import com.xiaohe.myrpc.fault.retry.RetryStrategy;
+import com.xiaohe.myrpc.fault.retry.RetryStrategyKeys;
 import com.xiaohe.myrpc.loadbalancer.LoadBalancerKeys;
 import com.xiaohe.myrpc.registry.EtcdRegistry;
 import com.xiaohe.myrpc.serializer.SerializerKeys;
@@ -50,5 +52,10 @@ public class RpcConfig {
      * 负载均衡器
      */
     private String loadBalancer = LoadBalancerKeys.ROUND_ROBIN;
+
+    /**
+     * 重试策略
+     */
+    private String retryStrategy = RetryStrategyKeys.NO;
 
 }

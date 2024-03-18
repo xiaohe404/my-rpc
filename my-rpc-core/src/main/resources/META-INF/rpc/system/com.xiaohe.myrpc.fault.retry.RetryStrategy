@@ -1,0 +1,2 @@
+no=com.xiaohe.myrpc.fault.retry.NoRetryStrategy
+fixedInterval=com.xiaohe.myrpc.fault.retry.FixedIntervalRetryStrategy

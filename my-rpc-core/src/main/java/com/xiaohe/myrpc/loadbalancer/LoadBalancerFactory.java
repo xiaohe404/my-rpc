@@ -2,6 +2,9 @@ package com.xiaohe.myrpc.loadbalancer;
 
 import com.xiaohe.myrpc.spi.SpiLoader;
 
+/**
+ * 负载均衡策略工厂（用于获取负载均衡器对象）
+ */
 public class LoadBalancerFactory {
 
     static {
