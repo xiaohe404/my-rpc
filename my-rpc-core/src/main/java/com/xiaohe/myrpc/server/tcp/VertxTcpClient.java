@@ -20,6 +20,15 @@ import java.util.concurrent.ExecutionException;
  */
 public class VertxTcpClient {
 
+    /**
+     * 发送请求
+     *
+     * @param rpcRequest
+     * @param serviceMetaInfo
+     * @return
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
     public static RpcResponse doRequest(RpcRequest rpcRequest, ServiceMetaInfo serviceMetaInfo)
             throws InterruptedException, ExecutionException {
         // 发送 TCP 请求

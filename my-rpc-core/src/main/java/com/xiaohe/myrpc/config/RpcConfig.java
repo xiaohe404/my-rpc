@@ -1,5 +1,6 @@
 package com.xiaohe.myrpc.config;
 
+import com.xiaohe.myrpc.loadbalancer.LoadBalancerKeys;
 import com.xiaohe.myrpc.registry.EtcdRegistry;
 import com.xiaohe.myrpc.serializer.SerializerKeys;
 import lombok.Data;
@@ -44,5 +45,10 @@ public class RpcConfig {
      * 注册中心
      */
     private RegistryConfig registryConfig = new RegistryConfig();
+
+    /**
+     * 负载均衡器
+     */
+    private String loadBalancer = LoadBalancerKeys.ROUND_ROBIN;
 
 }
