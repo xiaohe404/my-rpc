@@ -1,0 +1,4 @@
+failBack=com.xiaohe.myrpc.fault.FailBackTolerantStrategy
+failFast=com.xiaohe.myrpc.fault.FailFastTolerantStrategy
+failOver=com.xiaohe.myrpc.fault.FailOverTolerantStrategy
+failSafe=com.xiaohe.myrpc.fault.FailSafeTolerantStrategy

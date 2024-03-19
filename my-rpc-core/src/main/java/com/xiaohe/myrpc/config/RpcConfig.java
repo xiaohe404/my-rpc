@@ -2,6 +2,8 @@ package com.xiaohe.myrpc.config;
 
 import com.xiaohe.myrpc.fault.retry.RetryStrategy;
 import com.xiaohe.myrpc.fault.retry.RetryStrategyKeys;
+import com.xiaohe.myrpc.fault.tolerant.TolerantStrategy;
+import com.xiaohe.myrpc.fault.tolerant.TolerantStrategyKeys;
 import com.xiaohe.myrpc.loadbalancer.LoadBalancerKeys;
 import com.xiaohe.myrpc.registry.EtcdRegistry;
 import com.xiaohe.myrpc.serializer.SerializerKeys;
@@ -57,5 +59,10 @@ public class RpcConfig {
      * 重试策略
      */
     private String retryStrategy = RetryStrategyKeys.NO;
+
+    /**
+     * 容错策略
+     */
+    private String tolerantStrategy = TolerantStrategyKeys.FAIL_FAST;
 
 }
