@@ -21,6 +21,7 @@ import com.xiaohe.myrpc.serializer.Serializer;
 import com.xiaohe.myrpc.serializer.SerializerFactory;
 import com.xiaohe.myrpc.server.tcp.VertxTcpClient;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -68,6 +69,12 @@ public class ServiceProxy implements InvocationHandler {
             requestMap.put("methodName", rpcRequest.getMethodName());
             ServiceMetaInfo selectedServiceMetaInfo = loadBalancer.select(requestMap, serviceMetaInfoList);
 
+            /*// http 请求
+            // 指定序列化器
+            Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
+            byte[] bodyBytes = serializer.serialize(rpcRequest);
+            RpcResponse rpcResponse = doHttpRequest(selectedServiceMetaInfo, bodyBytes);*/
+
             // RPC 请求
             RpcResponse rpcResponse;
             try {
@@ -90,6 +97,27 @@ public class ServiceProxy implements InvocationHandler {
             return rpcResponse.getData();
         } catch (Exception e) {
             throw new RuntimeException("调用失败");
+        }
+    }
+
+    /**
+     * 发送 HTTP 请求
+     *
+     * @param selectedServiceMetaInfo
+     * @param bodyBytes
+     * @return
+     * @throws IOException
+     */
+    private static RpcResponse doHttpRequest(ServiceMetaInfo selectedServiceMetaInfo, byte[] bodyBytes) throws IOException {
+        final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
+        // 发送 HTTP 请求
+        try (HttpResponse httpResponse = HttpRequest.post(selectedServiceMetaInfo.getServiceAddress())
+                .body(bodyBytes)
+                .execute()) {
+            byte[] result = httpResponse.bodyBytes();
+            // 反序列化
+            RpcResponse rpcResponse = serializer.deserialize(result, RpcResponse.class);
+            return rpcResponse;
         }
     }
 }
