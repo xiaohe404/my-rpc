@@ -34,6 +34,8 @@ public class ConsumerExample {
         } else {
             System.out.println("user == null");
         }
+        userService.getUser(user);
+        userService.getUser(user);
         int number = userService.getNumber();
         System.out.println(number);
     }
